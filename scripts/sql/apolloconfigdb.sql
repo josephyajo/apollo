@@ -388,7 +388,13 @@ VALUES
     ('namespace.lock.switch', 'default', 'false', '一次发布只能有一个人修改开关'),
     ('item.key.length.limit', 'default', '128', 'item key 最大长度限制'),
     ('item.value.length.limit', 'default', '20000', 'item value最大长度限制'),
-    ('config-service.cache.enabled', 'default', 'false', 'ConfigService是否开启缓存，开启后能提高性能，但是会增大内存消耗！');
+    ('config-service.cache.enabled', 'default', 'false', 'ConfigService是否开启缓存，开启后能提高性能，但是会增大内存消耗！'),
+    ('spring.cloud.nacos.discovery.username', 'default', 'nacos', '访问nacos注册中心的用户名'),
+    ('spring.cloud.nacos.discovery.password', 'default', 'nacos', '访问nacos注册中心的密码'),
+    ('spring.cloud.nacos.discovery.server-addr', 'default', '127.0.0.1:8848', '访问nacos注册中心的路径'),
+    ('spring.cloud.nacos.discovery.heart-beat-timeout', 'default', '30000', '服务端没有接受到客户端心跳请求就将其设为不健康的时间间隔'),
+    ('spring.cloud.nacos.discovery.heart-beat-interval', 'default', '15000', 'nacos客户端向服务端发送心跳的时间间隔'),
+    ('spring.cloud.nacos.discovery.ip-delete-timeout', 'default', '60000', '服务端没有接受到客户端心跳请求就将其剔除的时间间隔');
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

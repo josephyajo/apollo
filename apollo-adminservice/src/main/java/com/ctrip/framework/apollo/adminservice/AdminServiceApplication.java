@@ -5,11 +5,14 @@ import com.ctrip.framework.apollo.common.ApolloCommonConfig;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+@EnableDiscoveryClient
 @EnableAspectJAutoProxy
 @Configuration
 @PropertySource(value = {"classpath:adminservice.properties"})
