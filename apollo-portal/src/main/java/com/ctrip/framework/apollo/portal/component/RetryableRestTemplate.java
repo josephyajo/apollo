@@ -12,15 +12,11 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Type;
-import java.net.SocketTimeoutException;
-import java.util.List;
-import java.util.Map;
-import javax.annotation.PostConstruct;
 import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.conn.HttpHostConnectException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -33,6 +29,11 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 import org.springframework.web.util.UriTemplateHandler;
+
+import java.lang.reflect.Type;
+import java.net.SocketTimeoutException;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 封装RestTemplate. admin server集群在某些机器宕机或者超时的情况下轮询重试
@@ -49,10 +50,10 @@ public class RetryableRestTemplate {
    * Admin service access tokens in "PortalDB.ServerConfig"
    */
   private static final Type ACCESS_TOKENS = new TypeToken<Map<String, String>>(){}.getType();
-
+  @Autowired
   private RestTemplate restTemplate;
 
-  private final RestTemplateFactory restTemplateFactory;
+//  private final RestTemplateFactory restTemplateFactory;
   private final AdminServiceAddressLocator adminServiceAddressLocator;
   private final PortalMetaDomainService portalMetaDomainService;
   private final PortalConfig portalConfig;
@@ -60,22 +61,22 @@ public class RetryableRestTemplate {
   private volatile Map<Env, String> adminServiceAccessTokenMap;
 
   public RetryableRestTemplate(
-      final @Lazy RestTemplateFactory restTemplateFactory,
+//      final @Lazy RestTemplateFactory restTemplateFactory,
       final @Lazy AdminServiceAddressLocator adminServiceAddressLocator,
       final PortalMetaDomainService portalMetaDomainService,
       final PortalConfig portalConfig
   ) {
-    this.restTemplateFactory = restTemplateFactory;
+//    this.restTemplateFactory = restTemplateFactory;
     this.adminServiceAddressLocator = adminServiceAddressLocator;
     this.portalMetaDomainService = portalMetaDomainService;
     this.portalConfig = portalConfig;
   }
 
 
-  @PostConstruct
-  private void postConstruct() {
-    restTemplate = restTemplateFactory.getObject();
-  }
+//  @PostConstruct
+//  private void postConstruct() {
+//    restTemplate = restTemplateFactory.getObject();
+//  }
 
   public <T> T get(Env env, String path, Class<T> responseType, Object... urlVariables)
       throws RestClientException {

@@ -1,16 +1,16 @@
 package com.ctrip.framework.apollo.portal.controller;
 
 import com.ctrip.framework.apollo.Apollo;
-import com.ctrip.framework.apollo.portal.environment.PortalMetaDomainService;
 import com.ctrip.framework.apollo.core.dto.ServiceDTO;
-import com.ctrip.framework.apollo.portal.environment.Env;
 import com.ctrip.framework.apollo.portal.component.PortalSettings;
-import com.ctrip.framework.apollo.portal.component.RestTemplateFactory;
 import com.ctrip.framework.apollo.portal.entity.vo.EnvironmentInfo;
 import com.ctrip.framework.apollo.portal.entity.vo.SystemInfo;
+import com.ctrip.framework.apollo.portal.environment.Env;
+import com.ctrip.framework.apollo.portal.environment.PortalMetaDomainService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.actuate.health.Health;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.ctrip.framework.apollo.portal.entity.bo.Health;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 @RestController
@@ -29,25 +28,26 @@ public class SystemInfoController {
   private static final String CONFIG_SERVICE_URL_PATH = "/services/config";
   private static final String ADMIN_SERVICE_URL_PATH = "/services/admin";
 
+  @Autowired
   private RestTemplate restTemplate;
   private final PortalSettings portalSettings;
-  private final RestTemplateFactory restTemplateFactory;
+//  private final RestTemplateFactory restTemplateFactory;
   private final PortalMetaDomainService portalMetaDomainService;
 
   public SystemInfoController(
       final PortalSettings portalSettings,
-      final RestTemplateFactory restTemplateFactory,
+//      final RestTemplateFactory restTemplateFactory,
       final PortalMetaDomainService portalMetaDomainService
   ) {
     this.portalSettings = portalSettings;
-    this.restTemplateFactory = restTemplateFactory;
+//    this.restTemplateFactory = restTemplateFactory;
     this.portalMetaDomainService = portalMetaDomainService;
   }
 
-  @PostConstruct
-  private void init() {
-    restTemplate = restTemplateFactory.getObject();
-  }
+//  @PostConstruct
+//  private void init() {
+//    restTemplate = restTemplateFactory.getObject();
+//  }
 
   @PreAuthorize(value = "@permissionValidator.isSuperAdmin()")
   @GetMapping

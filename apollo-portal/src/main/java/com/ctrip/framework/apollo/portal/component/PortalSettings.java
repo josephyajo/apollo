@@ -8,7 +8,7 @@ import com.ctrip.framework.apollo.portal.api.AdminServiceAPI;
 import com.ctrip.framework.apollo.portal.component.config.PortalConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.actuate.health.Health;
+import com.ctrip.framework.apollo.portal.entity.bo.Health;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 

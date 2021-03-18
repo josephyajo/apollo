@@ -3,7 +3,7 @@ package com.ctrip.framework.apollo.portal.api;
 import com.ctrip.framework.apollo.common.dto.*;
 import com.ctrip.framework.apollo.portal.environment.Env;
 import com.google.common.base.Joiner;
-import org.springframework.boot.actuate.health.Health;
+import com.ctrip.framework.apollo.portal.entity.bo.Health;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;

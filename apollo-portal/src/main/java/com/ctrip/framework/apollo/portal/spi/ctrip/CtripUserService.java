@@ -8,6 +8,7 @@ import com.ctrip.framework.apollo.portal.component.config.PortalConfig;
 import com.ctrip.framework.apollo.portal.entity.bo.UserInfo;
 import com.ctrip.framework.apollo.portal.spi.UserService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -26,6 +27,7 @@ import java.util.stream.Collectors;
  * @author Jason Song(song_s@ctrip.com)
  */
 public class CtripUserService implements UserService {
+  @Autowired
   private RestTemplate restTemplate;
   private List<String> searchUserMatchFields;
   private ParameterizedTypeReference<Map<String, List<UserServiceResponse>>> responseType;
@@ -33,20 +35,20 @@ public class CtripUserService implements UserService {
 
   public CtripUserService(PortalConfig portalConfig) {
     this.portalConfig = portalConfig;
-    this.restTemplate = new RestTemplate(clientHttpRequestFactory());
+//    this.restTemplate = new RestTemplate(clientHttpRequestFactory());
     this.searchUserMatchFields =
         Lists.newArrayList("empcode", "empaccount", "displayname", "c_name", "pinyin");
     this.responseType = new ParameterizedTypeReference<Map<String, List<UserServiceResponse>>>() {
     };
   }
 
-  private ClientHttpRequestFactory clientHttpRequestFactory() {
-    SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
-    factory.setConnectTimeout(portalConfig.connectTimeout());
-    factory.setReadTimeout(portalConfig.readTimeout());
-
-    return factory;
-  }
+//  private ClientHttpRequestFactory clientHttpRequestFactory() {
+//    SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+//    factory.setConnectTimeout(portalConfig.connectTimeout());
+//    factory.setReadTimeout(portalConfig.readTimeout());
+//
+//    return factory;
+//  }
 
   @Override
   public List<UserInfo> searchUsers(String keyword, int offset, int limit) {

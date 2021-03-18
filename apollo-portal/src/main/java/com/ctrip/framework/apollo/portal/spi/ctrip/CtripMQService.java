@@ -1,28 +1,19 @@
 package com.ctrip.framework.apollo.portal.spi.ctrip;
 
-import com.google.gson.Gson;
-
 import com.ctrip.framework.apollo.common.entity.App;
-import com.ctrip.framework.apollo.portal.environment.Env;
 import com.ctrip.framework.apollo.portal.component.config.PortalConfig;
 import com.ctrip.framework.apollo.portal.entity.bo.ReleaseHistoryBO;
+import com.ctrip.framework.apollo.portal.environment.Env;
 import com.ctrip.framework.apollo.portal.service.AppService;
 import com.ctrip.framework.apollo.portal.service.ReleaseService;
 import com.ctrip.framework.apollo.portal.spi.MQService;
 import com.ctrip.framework.apollo.tracer.Tracer;
-
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.http.client.SimpleClientHttpRequestFactory;
-import org.springframework.http.converter.FormHttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.Arrays;
-
-import javax.annotation.PostConstruct;
 
 
 public class CtripMQService implements MQService {
@@ -39,24 +30,24 @@ public class CtripMQService implements MQService {
   private ReleaseService releaseService;
   @Autowired
   private PortalConfig portalConfig;
-
+  @Autowired
   private RestTemplate restTemplate;
 
-  @PostConstruct
-  public void init() {
-    restTemplate = new RestTemplate();
-
-    SimpleClientHttpRequestFactory rf = (SimpleClientHttpRequestFactory) restTemplate.getRequestFactory();
-    rf.setReadTimeout(portalConfig.readTimeout());
-    rf.setConnectTimeout(portalConfig.connectTimeout());
-
-    MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-    converter.setSupportedMediaTypes(
-        Arrays.asList(MediaType.APPLICATION_JSON_UTF8, MediaType.APPLICATION_OCTET_STREAM));
-
-    restTemplate.setMessageConverters(Arrays.asList(converter, new FormHttpMessageConverter()));
-
-  }
+//  @PostConstruct
+//  public void init() {
+//    restTemplate = new RestTemplate();
+//
+//    SimpleClientHttpRequestFactory rf = (SimpleClientHttpRequestFactory) restTemplate.getRequestFactory();
+//    rf.setReadTimeout(portalConfig.readTimeout());
+//    rf.setConnectTimeout(portalConfig.connectTimeout());
+//
+//    MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+//    converter.setSupportedMediaTypes(
+//        Arrays.asList(MediaType.APPLICATION_JSON_UTF8, MediaType.APPLICATION_OCTET_STREAM));
+//
+//    restTemplate.setMessageConverters(Arrays.asList(converter, new FormHttpMessageConverter()));
+//
+//  }
 
   @Override
   public void sendPublishMsg(Env env, ReleaseHistoryBO releaseHistory) {

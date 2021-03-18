@@ -8,6 +8,7 @@ import com.ctrip.framework.apollo.tracer.Tracer;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -33,22 +34,23 @@ public class AdminServiceAddressLocator {
   private static final Logger logger = LoggerFactory.getLogger(AdminServiceAddressLocator.class);
 
   private ScheduledExecutorService refreshServiceAddressService;
+  @Autowired
   private RestTemplate restTemplate;
   private List<Env> allEnvs;
   private Map<Env, List<ServiceDTO>> cache = new ConcurrentHashMap<>();
 
   private final PortalSettings portalSettings;
-  private final RestTemplateFactory restTemplateFactory;
+//  private final RestTemplateFactory restTemplateFactory;
   private final PortalMetaDomainService portalMetaDomainService;
 
   public AdminServiceAddressLocator(
       final HttpMessageConverters httpMessageConverters,
       final PortalSettings portalSettings,
-      final RestTemplateFactory restTemplateFactory,
+//      final RestTemplateFactory restTemplateFactory,
       final PortalMetaDomainService portalMetaDomainService
   ) {
     this.portalSettings = portalSettings;
-    this.restTemplateFactory = restTemplateFactory;
+//    this.restTemplateFactory = restTemplateFactory;
     this.portalMetaDomainService = portalMetaDomainService;
   }
 
@@ -57,7 +59,7 @@ public class AdminServiceAddressLocator {
     allEnvs = portalSettings.getAllEnvs();
 
     //init restTemplate
-    restTemplate = restTemplateFactory.getObject();
+//    restTemplate = restTemplateFactory.getObject();
 
     refreshServiceAddressService =
         Executors.newScheduledThreadPool(1, ApolloThreadFactory.create("ServiceLocator", true));

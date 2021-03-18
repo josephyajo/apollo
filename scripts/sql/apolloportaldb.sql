@@ -314,7 +314,13 @@ VALUES
     ('consumer.token.salt', 'someSalt', 'consumer token salt'),
     ('admin.createPrivateNamespace.switch', 'true', '是否允许项目管理员创建私有namespace'),
     ('configView.memberOnly.envs', 'pro', '只对项目成员显示配置信息的环境列表，多个env以英文逗号分隔'),
-    ('apollo.portal.meta.servers', '{}', '各环境Meta Service列表');
+    ('apollo.portal.meta.servers', '{}', '各环境Meta Service列表'),
+    ('spring.cloud.nacos.discovery.username', 'default', 'nacos', '访问nacos注册中心的用户名'),
+    ('spring.cloud.nacos.discovery.password', 'default', 'nacos', '访问nacos注册中心的密码'),
+    ('spring.cloud.nacos.discovery.server-addr', 'default', '127.0.0.1:8848', '访问nacos注册中心的路径'),
+    ('spring.cloud.nacos.discovery.heart-beat-timeout', 'default', '30000', '服务端没有接受到客户端心跳请求就将其设为不健康的时间间隔'),
+    ('spring.cloud.nacos.discovery.heart-beat-interval', 'default', '15000', 'nacos客户端向服务端发送心跳的时间间隔'),
+    ('spring.cloud.nacos.discovery.ip-delete-timeout', 'default', '60000', '服务端没有接受到客户端心跳请求就将其剔除的时间间隔');
 
 
 INSERT INTO `Users` (`Username`, `Password`, `Email`, `Enabled`)
